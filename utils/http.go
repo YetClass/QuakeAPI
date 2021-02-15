@@ -8,11 +8,19 @@ import (
 	"net/http"
 )
 
-func DoGet(url string, data map[string]string, headers map[string]string) []byte {
+type Http interface {
+	DoGet(url string, data map[string]string, headers map[string]string) []byte
+	DoPost(url string, data map[string]string, headers map[string]string) []byte
+}
+
+type HttpClient struct {
+}
+
+func (h *HttpClient) DoGet(url string, data map[string]string, headers map[string]string) []byte {
 	return doRequest("GET", url, data, headers)
 }
 
-func DoPost(url string, data map[string]string, headers map[string]string) []byte {
+func (h *HttpClient) DoPost(url string, data map[string]string, headers map[string]string) []byte {
 	return doRequest("POST", url, data, headers)
 }
 

@@ -1,7 +1,9 @@
 package utils
 
-import "flag"
-import "QuakeAPI/model"
+import (
+	"QuakeAPI/model"
+	"flag"
+)
 
 func ParseInput() model.Input {
 	var userInfo bool
@@ -10,6 +12,7 @@ func ParseInput() model.Input {
 	var help bool
 	var output string
 	var total int
+	result := model.Input{}
 	flag.StringVar(&key, "key", "", "Input Your API Key.")
 	flag.IntVar(&total, "total", 100, "Number Of Queries You Want.")
 	flag.StringVar(&search, "search", "", "Input Search String.")
@@ -17,10 +20,10 @@ func ParseInput() model.Input {
 	flag.BoolVar(&userInfo, "userinfo", false, "Show Your User Information.")
 	flag.BoolVar(&help, "help", false, "Show Help Information.")
 	flag.Parse()
-	if help == true {
+	if key == "" || help == true {
 		flag.PrintDefaults()
+		return result
 	}
-	result := model.Input{}
 	result.UserInfo = userInfo
 	result.Key = key
 	result.Search = search

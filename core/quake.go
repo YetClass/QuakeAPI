@@ -9,13 +9,27 @@ import (
 	"strconv"
 )
 
-func GetUserInfo(key string) {
+type QuakeInterface interface {
+	GetUserInfo(key string)
+	GetServiceInfo(key string, query string, total int, pid string) (string, string)
+}
+
+type Core struct {
+}
+
+var httpClient utils.HttpClient
+
+func init() {
+	httpClient = utils.HttpClient{}
+}
+
+func (c Core) GetUserInfo(key string) {
 	url := "https://quake.360.cn/api/v3/user/info"
 	data := make(map[string]string)
 	headers := make(map[string]string)
 	headers["X-QuakeToken"] = key
 	headers["Content-Type"] = "application/json"
-	res := utils.DoGet(url, data, headers)
+	res := httpClient.DoGet(url, data, headers)
 	var userInfo model.UserInfo
 	err := json.Unmarshal(res, &userInfo)
 	if err != nil {
@@ -37,7 +51,7 @@ func GetUserInfo(key string) {
 	log.Log("Your Role Is "+roles.String(), log.INFO)
 }
 
-func GetServiceInfo(key string, query string, total int) (string, string) {
+func (c Core) GetServiceInfo(key string, query string, total int, pid string) (string, string) {
 	url := "https://quake.360.cn/api/v3/scroll/quake_service"
 	data := make(map[string]string)
 	data["query"] = query
@@ -45,11 +59,14 @@ func GetServiceInfo(key string, query string, total int) (string, string) {
 	data["start_time"] = "2020-01-01 00:00:00"
 	data["end_time"] = "2020-02-01 00:00:00"
 	data["ignore_cache"] = "true"
+	if pid != "" {
+		data["pagination_id"] = pid
+	}
 	headers := make(map[string]string)
 	headers["X-QuakeToken"] = key
 	headers["Content-Type"] = "application/json"
 	log.Log("Please Wait......", log.INFO)
-	res := utils.DoPost(url, data, headers)
+	res := httpClient.DoPost(url, data, headers)
 	var serviceInfo model.ServiceInfo
 	err := json.Unmarshal(res, &serviceInfo)
 	if err != nil {
@@ -66,6 +83,6 @@ func GetServiceInfo(key string, query string, total int) (string, string) {
 		output := value.IP + ":" + strconv.Itoa(value.Port)
 		result.WriteString(output + "\n")
 	}
-	pid := serviceInfo.Meta.PaginationID
-	return pid, result.String()
+	paginationID := serviceInfo.Meta.PaginationID
+	return paginationID, result.String()
 }
