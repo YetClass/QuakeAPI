@@ -24,3 +24,19 @@
 
 ### 查询结果
 ![](https://xuyiqing-1257927651.cos.ap-beijing.myqcloud.com/quake/quake2.png)
+
+# 360 Cyberspace Surveying And Mapping System (Quake) API
+
+-Like fofa and Shodan, Quake has more powerful functions
+-Golang write, generate exe, no need to install a variety of complex environment (Python, JDK, etc.)
+-Use high concurrency technology to improve the efficiency of obtaining large amounts of data
+-The code is relatively perfect, considering the subsequent expansibility
+
+## Parameter description
+
+- -- help: view help
+- -- key: enter your API key
+- -- Search: enter your query string
+- -- output: set the output file (default is result.txt ）
+- -- total: the total number of queries (the default is 100, if the number is large, the goroutine will be used automatically)
+- -- userinfo: query user related information
