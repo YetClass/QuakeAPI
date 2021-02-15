@@ -1,70 +1,72 @@
 package model
 
+import "time"
+
 type ServiceInfo struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 	Data    []struct {
-		Service struct {
-			Http struct {
-				Favicon struct {
+		Time      time.Time `json:"time"`
+		Transport string    `json:"transport"`
+		Service   struct {
+			HTTP struct {
+				HTMLHash string `json:"html_hash"`
+				Favicon  struct {
 					Hash     string `json:"hash"`
-					Data     string `json:"data"`
 					Location string `json:"location"`
+					Data     string `json:"data"`
 				} `json:"favicon"`
-				SecurityText    string `json:"security_text"`
-				RobotsText      string `json:"robots_hash"`
-				ResponseHeaders string `json:"response_headers"`
-				Path            string `json:"path"`
-				SitemapHash     string `json:"sitemap_hash"`
-				Body            string `json:"body"`
-				Title           string `json:"title"`
-				XPoweredBy      string `json:"x_powered_by"`
-				Host            string `json:"host"`
-				StatusCode      int    `json:"status_code"`
 				Robots          string `json:"robots"`
-				MetaKeywords    string `json:"meta_keywords"`
-				HtmlHash        string `json:"html_hash"`
-				Sitemap         string `json:"sitemap"`
+				SitemapHash     string `json:"sitemap_hash"`
 				Server          string `json:"server"`
+				Body            string `json:"body"`
+				XPoweredBy      string `json:"x_powered_by"`
+				MetaKeywords    string `json:"meta_keywords"`
+				RobotsHash      string `json:"robots_hash"`
+				Sitemap         string `json:"sitemap"`
+				Path            string `json:"path"`
+				Title           string `json:"title"`
+				Host            string `json:"host"`
+				SecurityText    string `json:"security_text"`
+				StatusCode      int    `json:"status_code"`
+				ResponseHeaders string `json:"response_headers"`
 			} `json:"http"`
+			Version  string `json:"version"`
+			Name     string `json:"name"`
+			Product  string `json:"product"`
 			Banner   string `json:"banner"`
 			Response string `json:"response"`
-			Name     string `json:"name"`
-			Version  string `json:"version"`
-			Product  string `json:"product"`
 		} `json:"service"`
-		Port     int `json:"port"`
-		Location struct {
-			Gps         []float64 `json:"gps"`
-			CountryEn   string    `json:"country_en"`
-			CountryCode string    `json:"country_code"`
-			ProvinceEn  string    `json:"province_en"`
-			DistrictEn  string    `json:"district_en"`
+		Images     []interface{} `json:"images"`
+		OsName     string        `json:"os_name"`
+		Components []interface{} `json:"components"`
+		Location   struct {
 			DistrictCn  string    `json:"district_cn"`
-			CityEn      string    `json:"city_en"`
 			ProvinceCn  string    `json:"province_cn"`
-			CityCn      string    `json:"city_cn"`
-			StreetEn    string    `json:"street_en"`
-			Isp         string    `json:"isp"`
-			StreetCN    string    `json:"street_cn"`
-			Owner       string    `json:"owner"`
+			Gps         []float64 `json:"gps"`
+			ProvinceEn  string    `json:"province_en"`
+			CityEn      string    `json:"city_en"`
+			CountryCode string    `json:"country_code"`
+			CountryEn   string    `json:"country_en"`
 			Radius      float64   `json:"radius"`
-			CountryCN   string    `json:"country_cn"`
+			DistrictEn  string    `json:"district_en"`
+			Isp         string    `json:"isp"`
+			StreetEn    string    `json:"street_en"`
+			Owner       string    `json:"owner"`
+			CityCn      string    `json:"city_cn"`
+			CountryCn   string    `json:"country_cn"`
+			StreetCn    string    `json:"street_cn"`
 		} `json:"location"`
-		Images     []string   `json:"images"`
-		OsVersion  string     `json:"os_version"`
-		Components []struct{} `json:"components"`
-		Org        string     `json:"org"`
-		Asn        int        `json:"asn"`
-		Hostname   string     `json:"hostname"`
-		IsIpv6     bool       `json:"is_ipv6"`
-		Ip         string     `json:"ip"`
-		OsName     string     `json:"os_name"`
-		Time       string     `json:"time"`
-		Transport  string     `json:"transport"`
+		Asn       int    `json:"asn"`
+		Hostname  string `json:"hostname"`
+		Org       string `json:"org"`
+		OsVersion string `json:"os_version"`
+		IsIpv6    bool   `json:"is_ipv6"`
+		IP        string `json:"ip"`
+		Port      int    `json:"port"`
 	} `json:"data"`
 	Meta struct {
 		Total        int    `json:"total"`
-		PaginationId string `json:"pagination_id"`
+		PaginationID string `json:"pagination_id"`
 	} `json:"meta"`
 }

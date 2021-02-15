@@ -4,16 +4,18 @@ type UserInfo struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 	Data    struct {
-		Id   string `json:"id"`
+		ID   string `json:"id"`
 		User struct {
+			ID       string `json:"id"`
 			Username string `json:"username"`
 			Fullname string `json:"fullname"`
 			Email    string `json:"email"`
 		} `json:"user"`
 		Baned            bool   `json:"baned"`
 		BanStatus        string `json:"ban_status"`
-		Credit           int    `json:"email"`
+		Credit           int    `json:"credit"`
 		PersistentCredit int    `json:"persistent_credit"`
+		AvatarID         string `json:"avatar_id"`
 		Token            string `json:"token"`
 		MobilePhone      string `json:"mobile_phone"`
 		Source           string `json:"source"`
@@ -22,16 +24,17 @@ type UserInfo struct {
 			Time   string `json:"time"`
 		} `json:"privacy_log"`
 		EnterpriseInformation struct {
-			Name   string `json:"name"`
-			Email  string `json:"email"`
-			Status string `json:"status"`
+			Name   interface{} `json:"name"`
+			Email  interface{} `json:"email"`
+			Status string      `json:"status"`
 		} `json:"enterprise_information"`
 		PersonalInformationStatus bool `json:"personal_information_status"`
 		Role                      []struct {
 			Fullname string `json:"fullname"`
 			Priority int    `json:"priority"`
 			Credit   int    `json:"credit"`
-		} `json:"Role"`
+		} `json:"role"`
 	} `json:"data"`
-	Meta struct{} `json:"meta"`
+	Meta struct {
+	} `json:"meta"`
 }

@@ -63,9 +63,9 @@ func GetServiceInfo(key string, query string, total int) (string, string) {
 	log.Log("Parsing Data......", log.INFO)
 	result := bytes.Buffer{}
 	for _, value := range serviceInfo.Data {
-		output := value.Ip + ":" + strconv.Itoa(value.Port)
+		output := value.IP + ":" + strconv.Itoa(value.Port)
 		result.WriteString(output + "\n")
 	}
-	pid := serviceInfo.Meta.PaginationId
+	pid := serviceInfo.Meta.PaginationID
 	return pid, result.String()
 }
